@@ -197,7 +197,7 @@ def generate_transcribed_files(df_audio):
 def test(dataset_path):
     df_info = pd.read_csv(f'{dataset_path}/info.csv', sep=';')
     df_info['Is incoming'] = df_info['Тип'] == 'Входящий'
-    df_info['Filepath'] = f'{dataset_path}/learn_dataset/' + df_info[
+    df_info['Filepath'] = f'{dataset_path}/' + df_info[
         'ID записи'].astype(
         str) + '.wav'
     df_info = df_info.drop(
@@ -213,7 +213,7 @@ def test(dataset_path):
         "Время": "Time"
     })
     df_audio_info = generate_audio_files_info(
-        f'{dataset_path}/learn_dataset')
+        f'{dataset_path}')
 
     df_transcribed = generate_transcribed_files(df_audio_info)
     df = pd.merge(df_audio_info, df_transcribed, on='Filepath', how='inner')
