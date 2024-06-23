@@ -2,6 +2,9 @@ import sys
 
 import pandas as pd
 
+import cat_boost
+import forest
+
 
 def ap(id, status):
     with open("ap.txt", "a") as f:
@@ -33,8 +36,13 @@ def train(dataset_path):
     df = pd.merge(df_audio_info, df_transcribed, on='Filepath', how='inner')
     df = pd.merge(df, df_info, on='Filepath', how='inner')
     df = df[df['Text'].str.len() > 20]
-    df.to_csv('train.csv', index=False)
+    df_vectorized = pd.read_csv("dataset/vectorized_files.csv")
+    df_ans = df[['Filepath', 'Successful']]
+    df_vectorized_full = pd.merge(df_ans, df_vectorized, how='inner',
+                                  on='Filepath')
+    df_vectorized_full.drop(columns='Filepath', inplace=True)
     forest.train(df)
+    cat_boost.train(df_vectorized_full)
 
 
 def test(dataset_path):
