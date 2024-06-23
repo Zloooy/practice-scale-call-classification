@@ -4,7 +4,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 def train(df):
     forest_df = df.drop(
-        columns=["Filepath", "Timestamp", "Text", "Time"]).astype(float)
+        columns=["Filepath", "Timestamp", "Text", "Time", "Who answered"]).astype(float)
     params = {'bootstrap': True, 'max_depth': None, 'min_samples_leaf': 4,
               'min_samples_split': 10, 'n_estimators': 300}
     forest = RandomForestClassifier(**params)

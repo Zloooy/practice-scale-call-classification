@@ -21,7 +21,7 @@ def ap(id, status):
 def train(dataset_path):
     df_audio_info = pd.read_csv('dataset/audio_files_info.csv')
     df_audio_info = df_audio_info.drop(columns='Sample_rate')
-    df_info = pd.read_csv('info.csv', sep=';')
+    df_info = pd.read_csv('dataset/info.csv', sep=';')
     df_info = df_info.drop(index=0, axis=1)
     df_info['Is incoming'] = df_info['Тип'] == 'Входящий'
     df_info['Filepath'] = 'learn_dataset/' + df_info['ID записи'].astype(
@@ -39,7 +39,7 @@ def train(dataset_path):
         "Успешный результат": "Successful",
         "Время": "Time"
     })
-    df_transcribed = pd.read_csv("transcribed_files.csv")
+    df_transcribed = pd.read_csv("dataset/transcribed_files.csv")
     df = pd.merge(df_audio_info, df_transcribed, on='Filepath', how='inner')
     df = pd.merge(df, df_info, on='Filepath', how='inner')
     df = df[df['Text'].str.len() > 20]
