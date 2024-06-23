@@ -236,7 +236,7 @@ def main():
         print("Please provide dataset path")
         exit(1)
     dataset_path = sys.argv[dataset_path + 1]
-    if "--train" in sys.argv:
+    if "--learn" in sys.argv:
         train(dataset_path)
     test(dataset_path)
 

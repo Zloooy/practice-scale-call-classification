@@ -3,3 +3,4 @@ scikit-learn
 catboost
 librosa
 whisperx
+numpy==1.26.4
