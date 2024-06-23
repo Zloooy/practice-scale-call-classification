@@ -238,7 +238,8 @@ def main():
     dataset_path = sys.argv[dataset_path + 1]
     if "--learn" in sys.argv:
         train(dataset_path)
-    test(dataset_path)
+    else:
+        test(dataset_path)
 
 
 if __name__ == "__main__":
